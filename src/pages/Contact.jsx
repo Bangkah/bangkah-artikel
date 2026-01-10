@@ -20,12 +20,15 @@ export default function Contact() {
 
 	return (
 		<>
+			<Seo
+				title="Kontak Bangkah - Muhammad Dhiyaul Atha (mdhiyaulatha)"
+				description="Hubungi Bangkah (Muhammad Dhiyaul Atha) untuk kolaborasi, pertanyaan, atau kerjasama. Email, Instagram, GitHub tersedia."
+				keywords="kontak bangkah, kontak atha, kontak mdhiyaulatha, kontak muhammad dhiyaul atha, email bangkah, email atha, email mdhiyaulatha, instagram bangkah, github bangkah, hubungi bangkah, hubungi atha, hubungi mdhiyaulatha, kontak UMKM, kontak bisnis, kontak desa Bangkah, kontak inspirasi, kontak artikel, kontak blog, kontak Muhammad Dhiyaul Atha, kontak mdhiyaulatha, kontak Bangkah artikel"
+				url="https://bangkah.vercel.app/kontak"
+				image="/bangkah-icon.svg"
+			/>
 			<div className="bg-white rounded-xl shadow p-8 max-w-2xl mx-auto border-l-4 border-blue-700 mt-8">
-				<Seo
-					title="Kontak Bangkah - Muhammad Dhiyaul Atha (mdhiyaulatha)"
-					description="Hubungi Bangkah (Muhammad Dhiyaul Atha) untuk kolaborasi, pertanyaan, atau kerjasama. Email, Instagram, GitHub tersedia."
-					keywords="kontak bangkah, kontak atha, kontak mdhiyaulatha, kontak muhammad dhiyaul atha, email bangkah, email atha, email mdhiyaulatha, instagram bangkah, github bangkah, hubungi bangkah, hubungi atha, hubungi mdhiyaulatha"
-				/>
+				<img src="/bangkah-icon.svg" alt="Logo Bangkah" className="w-16 h-16 mx-auto mb-4" />
 				<h1 className="text-3xl font-bold text-blue-800 mb-2">Kontak Bangkah</h1>
 				<p className="mb-2 text-gray-700">Ingin terhubung, kolaborasi, atau sekadar menyapa? Silakan hubungi saya melalui:</p>
 				<ul className="list-none ml-0 text-gray-700 mb-4">
