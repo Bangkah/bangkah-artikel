@@ -36,6 +36,11 @@ export default function Post({ posts, onUpdate }) {
       <h1 className="text-3xl font-bold text-blue-800 mb-2">{post.title}</h1>
       <p className="text-gray-400 mb-2">{post.date} &middot; <span className="text-blue-700 font-semibold">{post.views || 1} views</span></p>
       <pre className="whitespace-pre-wrap text-gray-700 mb-6">{post.content}</pre>
+      {post.source && (
+        <div className="mb-6 text-sm text-gray-500">
+          Sumber: <a href={post.source} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">{post.source}</a>
+        </div>
+      )}
       <div className="mb-6">
         <h2 className="text-xl font-bold mb-2 text-blue-700">Komentar</h2>
         <form onSubmit={handleAddComment} className="flex gap-2 mb-4">
