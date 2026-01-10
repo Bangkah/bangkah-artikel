@@ -1,3 +1,4 @@
+
 import Footer from './components/Footer';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -5,6 +6,9 @@ import Post from './pages/Post';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Navbar from './components/Navbar';
+import Abot from './pages/Abot';
+import Contak from './pages/Contak';
+import Artikel from './pages/Artikel';
 import React from 'react';
 
 function App() {
@@ -70,8 +74,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home posts={posts} onAdd={addPost} onUpdate={updatePost} onDelete={deletePost} />} />
           <Route path="/post/:id" element={<Post posts={posts} onUpdate={updatePost} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/artikel" element={<Artikel posts={posts} />} />
+          <Route path="/tentang" element={<About />} />
+          <Route path="/kontak" element={<Contact />} />
+          <Route path="/abot" element={<Abot />} />
+          <Route path="/contak" element={<Contak />} />
         </Routes>
       </main>
       <Footer dark={dark} />

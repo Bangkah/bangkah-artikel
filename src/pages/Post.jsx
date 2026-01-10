@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import Seo from '../components/Seo';
 
 export default function Post({ posts, onUpdate }) {
   const { id } = useParams();
@@ -32,7 +33,13 @@ export default function Post({ posts, onUpdate }) {
   if (!post) return <div className="text-center text-red-500 font-bold">Post tidak ditemukan.</div>;
 
   return (
-    <div className="bg-white rounded-xl shadow p-8 max-w-2xl mx-auto border-l-4 border-blue-700">
+    <>
+      <Seo
+        title={post.title + ' | Bangkah Blog'}
+        description={post.excerpt || post.content?.slice(0, 150)}
+        url={post.source || window.location.href}
+      />
+      <div className="bg-white rounded-xl shadow p-8 max-w-2xl mx-auto border-l-4 border-blue-700">
       <h1 className="text-3xl font-bold text-blue-800 mb-2">{post.title}</h1>
       <p className="text-gray-400 mb-2">{post.date} &middot; <span className="text-blue-700 font-semibold">{post.views || 1} views</span></p>
       <pre className="whitespace-pre-wrap text-gray-700 mb-6">{post.content}</pre>
@@ -64,5 +71,6 @@ export default function Post({ posts, onUpdate }) {
       </div>
       <Link to="/" className="text-blue-700 font-semibold hover:underline">← Kembali ke Blog</Link>
     </div>
+    </>
   );
 }
