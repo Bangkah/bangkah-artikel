@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Seo({ title, description, url, image }) {
+export default function Seo({ title, description, url, image, keywords }) {
   React.useEffect(() => {
     if (title) document.title = title;
 
@@ -38,14 +38,14 @@ export default function Seo({ title, description, url, image }) {
     }
 
     // Keywords
-    const keywords = 'Bangkah, Bangkah artikel, atha, muhammad dhiyaul atha, mdhiyaulatha, UMKM, artikel UMKM, blog Bangkah, desa Bangkah, inspirasi UMKM, bisnis lokal, artikel bisnis, artikel inspirasi, artikel desa, artikel atha, artikel mdhiyaulatha, artikel muhammad dhiyaul atha';
+    const defaultKeywords = 'Bangkah, Bangkah artikel, atha, muhammad dhiyaul atha, mdhiyaulatha, UMKM, artikel UMKM, blog Bangkah, desa Bangkah, inspirasi UMKM, bisnis lokal, artikel bisnis, artikel inspirasi, artikel desa, artikel atha, artikel mdhiyaulatha, artikel muhammad dhiyaul atha';
     let metaKeywords = document.querySelector('meta[name="keywords"]');
     if (!metaKeywords) {
       metaKeywords = document.createElement('meta');
       metaKeywords.name = 'keywords';
       document.head.appendChild(metaKeywords);
     }
-    metaKeywords.content = keywords;
+    metaKeywords.content = keywords || defaultKeywords;
 
     // Author
     let metaAuthor = document.querySelector('meta[name="author"]');

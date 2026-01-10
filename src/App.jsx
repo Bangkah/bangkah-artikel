@@ -79,6 +79,8 @@ function App() {
           <Route path="/kontak" element={<Contact />} />
           <Route path="/abot" element={<Abot />} />
           <Route path="/contak" element={<Contak />} />
+          {/* Redirect semua typo/halaman tidak ditemukan ke homepage */}
+          <Route path="*" element={<Home posts={posts} onAdd={addPost} onUpdate={updatePost} onDelete={deletePost} />} />
         </Routes>
       </main>
       <Footer dark={dark} />
