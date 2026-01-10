@@ -1,14 +1,13 @@
-
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Post from './pages/Post';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Navbar from './components/Navbar';
+import React from 'react';
 
-export default function App() {
+function App() {
   const [posts, setPosts] = React.useState([
     {
       id: 1,
@@ -31,16 +30,41 @@ export default function App() {
       content: `Website responsive menyesuaikan tampilan di berbagai perangkat.\n\nGunakan CSS Flexbox/Grid dan media queries untuk hasil optimal.`,
       date: '2026-01-08',
     },
+    {
+      id: 4,
+      title: 'Skip the Boilerplate: Scaffold a Production-Ready Laravel Project in Seconds with Bangkah Starter Kit',
+      excerpt: 'Bangkah adalah CLI tool untuk scaffolding Laravel siap produksi dengan Docker, web/API template, dan best practice. Hemat waktu setup, langsung coding!',
+      content: `Hello developers 👋\n\nSetting up a production-ready Laravel project often means repeating the same steps: configuring Docker, setting up Nginx, wiring authentication, preparing environment files, and optimizing builds. While all of this is necessary, it quickly becomes a time-consuming and repetitive process—especially when you start new projects often.\n\nItulah alasan Bangkah dibuat — sebuah Laravel Starter Kit.\n\n## 🤔 Why Bangkah? Solving Setup Fatigue\n\nBangkah jauh melampaui sekadar \\`composer create-project\\`. Ia membundel infrastruktur penting untuk aplikasi Laravel modern, agar kamu bisa fokus membangun fitur, bukan setup awal.\n\n## ⚙️ Key Features\n\n### 1️⃣ Zero-Config Docker Integration\n- docker-compose.yml siap pakai\n- Nginx, PHP-FPM 8.2+, MySQL/PostgreSQL\n- Jalankan app lokal cukup 1-2 perintah Docker\n\n### 2️⃣ Dual Application Templates\n- Web App: Auth, Vite, Breeze/UI, struktur web\n- API: CORS, struktur API-first, versioning, rate limit\n\n### 3️⃣ Optimized for Speed & Security\n- Multi-stage Docker build\n- Composer install cepat\n- UI modern: Tailwind/Bootstrap\n- Siap production dari awal\n\n## 🚀 Get Started\n\nCek source code, dokumentasi, dan coba Bangkah:\nhttps://github.com/Bangkah/bangkah-launcher\n\n## 🤝 We Need Your Collaboration\n\nBangkah open source dan untuk komunitas Laravel.\n- Coba dan hemat waktu setup\n- Beri feedback & kontribusi\n- Fork & PR\n\nLet’s build a faster and cleaner way to launch Laravel projects together 🚀\n\nHappy Coding! 💻✨`,
+      date: '2026-01-10',
+    },
   ]);
 
-  // CRUD Handlers (dummy, to be implemented)
+  // Dark mode global state
+  const [dark, setDark] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return true;
+  });
+  React.useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [dark]);
+
   const addPost = post => setPosts(p => [...p, post]);
   const updatePost = updated => setPosts(p => p.map(post => post.id === updated.id ? updated : post));
   const deletePost = id => setPosts(p => p.filter(post => post.id !== id));
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
+    <div className={
+      `flex flex-col min-h-screen transition-colors duration-300 ${dark ? 'bg-[#0e1320] text-white' : 'bg-white text-[#101624]'}`
+    }>
+      <Navbar dark={dark} setDark={setDark} />
       <main className="main-content flex-1">
         <Routes>
           <Route path="/" element={<Home posts={posts} onAdd={addPost} onUpdate={updatePost} onDelete={deletePost} />} />
@@ -49,8 +73,10 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
-  <Footer />
+      <Footer dark={dark} />
     </div>
   );
 }
+
+export default App;
 
