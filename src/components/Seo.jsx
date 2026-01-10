@@ -2,6 +2,15 @@ import React from 'react';
 
 export default function Seo({ title, description, url, image, keywords }) {
   React.useEffect(() => {
+    // Google Site Verification (global for all pages)
+    const googleVerificationContent = '6Y8g_eelfKIolwQbgNWo3J5Sn3NHlNwb9gb2p-ZUr-Q';
+    let metaGoogle = document.querySelector('meta[name="google-site-verification"]');
+    if (!metaGoogle) {
+      metaGoogle = document.createElement('meta');
+      metaGoogle.name = 'google-site-verification';
+      document.head.appendChild(metaGoogle);
+    }
+    metaGoogle.content = googleVerificationContent;
     if (title) document.title = title;
 
     // Description
