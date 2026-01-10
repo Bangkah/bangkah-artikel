@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default function Seo({ title, description, url, image, keywords }) {
+export default function Seo({
+  title = 'Bangkah - Artikel, Inspirasi, dan UMKM',
+  description = 'Blog Bangkah: Artikel inspirasi, UMKM, bisnis lokal, dan kisah sukses dari desa Bangkah. Ditulis oleh Muhammad Dhiyaul Atha (mdhiyaulatha).',
+  url,
+  image = '/bangkah-icon.svg',
+  keywords
+}) {
   React.useEffect(() => {
     // Google Site Verification (global for all pages)
     const googleVerificationContent = '6Y8g_eelfKIolwQbgNWo3J5Sn3NHlNwb9gb2p-ZUr-Q';
@@ -11,7 +17,7 @@ export default function Seo({ title, description, url, image, keywords }) {
       document.head.appendChild(metaGoogle);
     }
     metaGoogle.content = googleVerificationContent;
-    if (title) document.title = title;
+    document.title = title;
 
     // Description
     if (description) {
@@ -25,26 +31,23 @@ export default function Seo({ title, description, url, image, keywords }) {
     }
 
     // Canonical URL
-    if (url) {
-      let link = document.querySelector('link[rel="canonical"]');
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = 'canonical';
-        document.head.appendChild(link);
-      }
-      link.href = url;
+    let canonicalUrl = url || window.location.href;
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'canonical';
+      document.head.appendChild(link);
     }
+    link.href = canonicalUrl;
 
     // Image (Open Graph)
-    if (image) {
-      let og = document.querySelector('meta[property="og:image"]');
-      if (!og) {
-        og = document.createElement('meta');
-        og.setAttribute('property', 'og:image');
-        document.head.appendChild(og);
-      }
-      og.content = image;
+    let og = document.querySelector('meta[property="og:image"]');
+    if (!og) {
+      og = document.createElement('meta');
+      og.setAttribute('property', 'og:image');
+      document.head.appendChild(og);
     }
+    og.content = image;
 
     // Keywords
     const defaultKeywords = 'Bangkah, Bangkah artikel, atha, muhammad dhiyaul atha, mdhiyaulatha, UMKM, artikel UMKM, blog Bangkah, desa Bangkah, inspirasi UMKM, bisnis lokal, artikel bisnis, artikel inspirasi, artikel desa, artikel atha, artikel mdhiyaulatha, artikel muhammad dhiyaul atha';
@@ -81,10 +84,9 @@ export default function Seo({ title, description, url, image, keywords }) {
       { property: 'og:type', content: 'article' },
       { property: 'og:title', content: title },
       { property: 'og:description', content: description },
-      { property: 'og:url', content: url },
+      { property: 'og:url', content: canonicalUrl },
     ];
     ogTags.forEach(({ property, content }) => {
-      if (!content) return;
       let tag = document.querySelector(`meta[property="${property}"]`);
       if (!tag) {
         tag = document.createElement('meta');
@@ -103,7 +105,6 @@ export default function Seo({ title, description, url, image, keywords }) {
       { name: 'twitter:site', content: '@mdhiyaulatha' },
     ];
     twitterTags.forEach(({ name, content }) => {
-      if (!content) return;
       let tag = document.querySelector(`meta[name="${name}"]`);
       if (!tag) {
         tag = document.createElement('meta');
@@ -130,12 +131,13 @@ export default function Seo({ title, description, url, image, keywords }) {
       'publisher': {
         '@type': 'Organization',
         'name': 'Bangkah',
+        'url': canonicalUrl,
         'logo': {
           '@type': 'ImageObject',
           'url': '/bangkah-icon.svg'
         }
       },
-      'mainEntityOfPage': url,
+      'mainEntityOfPage': canonicalUrl,
       'datePublished': new Date().toISOString(),
     };
     const script = document.createElement('script');
