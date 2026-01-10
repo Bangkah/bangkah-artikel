@@ -144,6 +144,6 @@ export default function Seo({ title, description, url, image, keywords }) {
     script.innerHTML = JSON.stringify(jsonLd);
     document.head.appendChild(script);
 
-  }, [title, description, url, image]);
+  }, [title, description, url, image, keywords]);
   return null;
 }
